@@ -27,10 +27,15 @@ void check_io(const char* comment, int what) {
 
 int main(int argc, char** argv) {
 	if (argc < 2) {
-		return 1;
+		perror("Wrong usage");
+		_exit(1);
 	}
 	size_t buffer_size = (size_t) atoi(argv[1]) + 1;
 	char* buffer = (char*) malloc(sizeof(char) * buffer_size);
+	if (buffer == NULL) {
+		perror("Malloc error");
+		_exit(1);
+	}
 	size_t buffer_len = 0;
 	int r, w;
 	int i;
